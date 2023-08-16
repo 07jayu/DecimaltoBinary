@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decimal To Binary</title>
+    <style>
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+        body {
+            background-color: #0075ff;
+
+        }
+        .mainbox {
+            background-color: #ffffff;
+            width: 80vmin;
+            max-width: 37.5em;
+            padding: 3em 2.5em;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            border-radius: 0.62em;
+            box-shadow: 0 1.2em 2.5em rgba(0, 21, 44, 0.18);
+        }
+        h2 {
+            font-size: 1.8em;
+            color: #0075ff;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 1.3em;
+        }
+        .wraper {
+            display: flex;
+            justify-content: space-between;
+            gap: 1.8em;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.50em;
+            font-weight: 500;
+            color: #050121;
+        }
+        input{
+            position: relative;
+            font-size: 1.1em;
+            width: 100%;
+            padding:0.5em;
+            border-radius: 0.2em;
+            border: 1.5px solid gray;
+            color: #43405c;
+            outline: none;
+        }
+        input:focus {
+            border-color: #0075ff;
+        }
+        #error-msg {
+            text-align: center;
+            margin-top: 1.25em;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="mainbox">
+        <h2>Decimal To Binary Converter</h2>
+        <div class="wraper">
+            <div class="input-wraper">
+                <label for="dec-inp">Decimal : </label>
+                <input type="number" id="dec-inp">
+            </div>
+            <div class="input-wraper">
+                <label for="bin-inp">Binary : </label>
+                <input type="number" id="bin-inp">
+            </div>
+        </div>
+        <p id="error-msg"></p>
+    </div>
+    <script>
+        //Initial References
+
+        let decInp = document.getElementById("dec-inp");
+        let binInp = document.getElementById("bin-inp");
+        let errorMsg = document.getElementById("error-msg");
+
+        //convert decimal to binary when user input in the decimal Number
+
+        decInp.addEventListener("input",()=> {
+            let decValue = parseInt(decInp.value);
+            //converts the decimal value to binary
+            binInp.value = decValue.toString(2);
+        });
+            
+        //convert binary to decimal when user inputs in the binary filed 
+            
+       binInp.addEventListener("input",() => {
+            let binValue = binInp.value;
+            //if the binary number is valid convert it to decimal
+            if(binValidator(binValue)) {
+                decInp.value = parseInt(binValue,2);
+                errorMsg.textContent = "";
+            }else{
+                errorMsg.textContent = "Please Enter An Valid Binary Input";
+            }
+
+            function binValidator(num){
+                for(let i = 0;i < num.lenght; i++){
+                    if (num[i] != "0" && num[i] !="1"){
+                        return false;
+                    }
+                }
+                return true;
+            }
+        });
+    </script>
+</body>
+</html>
